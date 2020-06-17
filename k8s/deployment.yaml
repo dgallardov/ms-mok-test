@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms-tpgccli
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      ip-service: ms-tpgccli
+  template:
+    metadata:
+      labels:
+        ip-service: ms-tpgccli
+    spec:
+      containers:
+        - name: ms-tpgccli
+          image: pentabrasildevqa.azurecr.io/ms-tpgccli:latest
+          ports:
+            - containerPort: 5000
+          resources:
+            requests:
+              cpu: 100m
+      imagePullSecrets:
+        - name: pentaregistry
